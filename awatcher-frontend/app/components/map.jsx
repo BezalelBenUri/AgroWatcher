@@ -1,7 +1,7 @@
 "use client"
 
-import {useEffect} from "react";
-import { MapContainer, TileLayer, GeoJSON} from "react-leaflet";
+import {useEffect, useState} from "react";
+import { MapContainer, TileLayer, GeoJSON, Popup} from "react-leaflet";
 import { Alert, Spinner } from "react-bootstrap";
 
 import "leaflet/dist/leaflet.css"
@@ -18,6 +18,7 @@ const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 const Map = () => {
     const { data, error } = useSWR(url, fetcher);
+
     console.log(data);
 
     if (error) {
@@ -38,6 +39,17 @@ const Map = () => {
 
     const features = data?.features;
 
+    const onEachFeature = (feature, layer) => {
+        const popupContent = `
+        <div>
+            <h6>${feature.properties.name}</h6>
+            <p>Size: ${feature.properties.size}</p>
+            <p>Crop: ${feature.properties.crop}</p>
+        </div>
+    `;
+    layer.bindPopup(popupContent);
+    };
+
     return (
         <MapContainer center = {[12.71671, 4.50154]} zoom = {10} style = {{height: "95vh"}}>
             <TileLayer
@@ -45,8 +57,7 @@ const Map = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {features && (
-                <GeoJSON data = {features} style = {{color: "green"}}>
-                </GeoJSON>
+                <GeoJSON data = {features} style = {{color: "green"}} onEachFeature = {onEachFeature}></GeoJSON>
             )}
         </MapContainer>
     )
