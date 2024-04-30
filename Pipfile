@@ -12,6 +12,8 @@ django-cors-headers = "*"
 django-environ = "*"
 psycopg = "*"
 psycopg-binary = "*"
+earthengine-api = "*"
+google-cloud-storage = "*"
 
 [dev-packages]
 black = "*"
