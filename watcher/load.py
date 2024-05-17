@@ -1,8 +1,8 @@
 from pathlib import Path
 from django.contrib.gis.utils import LayerMapping
-from .models import watcher_model
+from .models import farm
 
-watcher_mapping = {
+farm_mapping = {
     "fid": "fid",
     "name": "Name",
     "size": "Size",
@@ -10,8 +10,8 @@ watcher_mapping = {
     "geom": "MULTIPOLYGON",
 }
 
-watcher_shp = Path(__file__).resolve().parent / "data" / "KBFarmlands.shp"
+farm_shp = Path(__file__).resolve().parent / "data" / "KBFarmlands.shp"
 
 def run(verbose = True):
-    lm = LayerMapping(watcher_model, watcher_shp, watcher_mapping, transform = False)
+    lm = LayerMapping(farm, farm_shp, farm_mapping, transform = False)
     lm.save(strict = True, verbose = verbose)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import watcher_model
+from .models import farm
 
 # Register your models here.
-admin.site.register(watcher_model, admin.ModelAdmin)
+admin.site.register(farm, admin.ModelAdmin)

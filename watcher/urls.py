@@ -1,5 +1,9 @@
 from rest_framework.routers import DefaultRouter
 
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import path, include
+
 from .views import farmViewSet
 
 router = DefaultRouter()
@@ -10,4 +14,10 @@ router.register(
     basename = "farms"
 )
 
-urlpatterns = router.urls
+urlpatterns = [
+    path('', include(router.urls)),
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.SATELLITE_IMAGES_URL, document_root=settings.SATELLITE_IMAGES_DIR)
