@@ -6,7 +6,9 @@ from django.conf import settings
 from .models import farm
 
 # Authenticate and initialize the Earth Engine API
+ee.Authenticate()
 ee.Initialize(project="ee-bezalelbenuri")
+
 
 def download_satellite_image(farm):
     try:
@@ -17,9 +19,10 @@ def download_satellite_image(farm):
         print(f"Processed Geometry: {geometry.getInfo()}")  # Debug print statement
 
         # Get the latest Landsat 8 image
-        image = ee.ImageCollection("COPERNICUS/S2_SR") \
+        image = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED") \
             .filterBounds(geometry) \
             .sort('DATE_ACQUIRED', False) \
+            .filter(ee.Filter.lte('CLOUDY_PIXEL_PERCENTAGE', 0)) \
             .first()
         
         # Define visualization parameters
