@@ -9,6 +9,9 @@ class farm(models.Model):
 
     geom = models.MultiPolygonField(srid = 4326)
     image_path = models.CharField(max_length = 255, blank = True, null = True)
+    ndvi_path = models.CharField(max_length = 255, blank = True, null = True)
+    ndmi_path = models.CharField(max_length = 255, blank = True, null = True)
+    ndwi_path = models.CharField(max_length = 255, blank = True, null = True)
 
     def __str__(self):
         return self.name
