@@ -16,7 +16,14 @@ class farmViewSet(viewsets.ModelViewSet):
     def download_image(self, request, pk = None):
         farm_instance = self.get_object()
         download_satellite_image(farm_instance)
-        return Response({"status": "image downloaded", "image_path": farm_instance.image_path})
+        return Response({
+            "status": "image downloaded", 
+            "image_path": farm_instance.image_path,
+            "ndvi_path": farm_instance.ndvi_path,
+            "ndmi_path": farm_instance.ndmi_path,
+            "ndwi_path": farm_instance.ndwi_path,
+
+            })
     
     def retrieve(self, request, *args, **kwargs):
         farm_instance = self.get_object()
