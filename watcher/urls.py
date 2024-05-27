@@ -21,3 +21,7 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.SATELLITE_IMAGES_URL, document_root=settings.SATELLITE_IMAGES_DIR)
+    urlpatterns += static(settings.NDVI_IMAGES_URL, document_root=settings.NDVI_IMAGES_DIR)
+    urlpatterns += static(settings.NDMI_IMAGES_URL, document_root=settings.NDMI_IMAGES_DIR)
+    urlpatterns += static(settings.NDWI_IMAGES_URL, document_root=settings.NDWI_IMAGES_DIR)
+    

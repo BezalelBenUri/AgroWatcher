@@ -1,18 +1,18 @@
 "use client"
 
 import {useEffect, useState} from "react";
+import {useRouter} from "next/navigation";
 import { MapContainer, TileLayer, GeoJSON, Popup, useMap} from "react-leaflet";
-import {Spinner} from "@nextui-org/react";
-
+import Spinner from 'react-bootstrap/Spinner';
 import { Alert } from "react-bootstrap";
 
 import "leaflet/dist/leaflet.css"
 
 import useSWR from "swr";
-
 import axios from "axios";
 
 const url = "http://127.0.0.1:8000/api/v1/farms/";
+
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 //const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -31,6 +31,8 @@ const Map = () => {
     const [loading, setLoading] = useState(false);
 
     console.log(data);
+
+    const router = useRouter()
 
     const fetchImage = async (farmId) => {
         setLoading(true);
@@ -63,9 +65,9 @@ const Map = () => {
     }
     if (!data) {
         return (
-            <Spinner
-            label = "Warning" size = "md" color = "secondary"
-        />
+            <Spinner animation = "border" role = "status">
+                <span className = "visually-hidden">Loading...</span>
+            </Spinner>
         );
     }
 
@@ -98,13 +100,18 @@ const Map = () => {
                         <p className = "mb-1">Size: {selectedFarm.properties.size}</p>
                         <p className = "mb-1">Crop: {selectedFarm.properties.crop}</p>
                         {loading ? (
-                            <Spinner label = "Loading" size = "lg" color = "secondary"  />
+                            <Spinner animation = "border" role = "status" size = "sm">
+                                <span className = "visually-hidden">Loading...</span>
+                            </Spinner>
                         ) : (
                         imagePath && (
-                            <img src = {`http://127.0.0.1:8000/${imagePath}`} 
+                            <img 
+                            src = {`http://127.0.0.1:8000/${imagePath}`} 
                             alt = "Satellite Image of Farm" 
                             width = {500} height = {500} 
-                            className = "h-auto max-w-lg"/>
+                            className = "h-auto max-w-lg"
+                            onClick = {() => router.push(`/dashboard/${selectedFarm.id}`)}
+                            />
                         )
                         )}
                     </div>

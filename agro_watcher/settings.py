@@ -137,6 +137,19 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Directory for generated satellite images
 SATELLITE_IMAGES_DIR = os.path.join(BASE_DIR, 'watcher', 'generated', 'satellite_images')
 SATELLITE_IMAGES_URL = '/generated/satellite_images/'
+
+# Directory for generated NDVI images
+NDVI_IMAGES_DIR = os.path.join(BASE_DIR, 'watcher', 'generated', 'ndvi_images')
+NDVI_IMAGES_URL = '/generated/ndvi_images/'
+
+# Directory for generated NDMI images
+NDMI_IMAGES_DIR = os.path.join(BASE_DIR, 'watcher', 'generated', 'ndmi_images')
+NDMI_IMAGES_URL = '/generated/ndmi_images/'
+
+# Directory for generated NDWI images
+NDWI_IMAGES_DIR = os.path.join(BASE_DIR, 'watcher', 'generated', 'ndwi_images')
+NDWI_IMAGES_URL = '/generated/ndwi_images/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
