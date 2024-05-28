@@ -23,6 +23,7 @@ def get_image_url(image, geometry, vis_params):
         "max": vis_params.get("max", 3000),
         "region": geometry,
         "dimensions": 512,
+        "palette": vis_params.get("palette"),
         "format": "png"
     })
 
@@ -63,10 +64,16 @@ def download_satellite_image(farm):
         # calculate indices
         ndvi, ndmi, ndwi = calculate_indices(image, geometry)
 
+        # Define visualization parameters for indices
+        ndvi_vis_params = {"min": -1, "max": 1, "palette": ["blue", "white", "green"]}
+        ndmi_vis_params = {"min": -1, "max": 1, "palette": ["white", "blue"]}
+        ndwi_vis_params = {"min": -1, "max": 1, "palette": ["white", "green"]}
+
+
         # Get URLS for indices
-        ndvi_url = get_image_url(ndvi, geometry, {"min": -1, "max": 1})
-        ndmi_url = get_image_url(ndmi, geometry, {"min": -1, "max": 1})
-        ndwi_url = get_image_url(ndwi, geometry, {"min": -1, "max": 1})
+        ndvi_url = get_image_url(ndvi, geometry, ndvi_vis_params)
+        ndmi_url = get_image_url(ndmi, geometry, ndmi_vis_params)
+        ndwi_url = get_image_url(ndwi, geometry, ndwi_vis_params)
 
         # Define local file paths
         ndvi_path = os.path.join(settings.BASE_DIR, "watcher", "generated", "ndvi_images", f"{farm.id}_ndvi.png")

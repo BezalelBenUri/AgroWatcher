@@ -11,6 +11,7 @@
   "dependencies": {
     "@nextui-org/spinner": "^2.0.28",
     "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
     "leaflet": "^1.9.4",
     "next": "14.2.2",
     "react": "^18",

@@ -1,8 +1,15 @@
 "use client"
 
+
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+// import LineChart from './LineChart';
 import Spinner from 'react-bootstrap/Spinner';
 
 const Dashboard = () => {
@@ -38,27 +45,74 @@ const Dashboard = () => {
     }
 
     return (
-        <div>
-            <h1>{farmData.name}</h1>
-            <p>Size: {farmData.size}</p>
-            <p>Crop: {farmData.crop}</p>
-            <div>
-                <h2>Satellite Image</h2>
-                <img src = {`http://127.0.0.1:8000/${farmData.image_path}`} alt = "Satellite Image"/>
-            </div>
-            <div>
-                <h2>NDVI Image</h2>
-                <img src = {`http://127.0.0.1:8000/${farmData.ndvi_path}`} alt = "NDVI Image"/>
-            </div>
-            <div>
+        <Container>
+            <h1 className = "my-4">{farmData.name}</h1>
+            <Row>
+                <Col md = {6}>
+                    <Card className = "mb-6">
+                        <Card.Body>
+                            <Card.Title>Farm Details</Card.Title>
+                            <Card.Text>Size: {farmData.size}</Card.Text>
+                            <Card.Text>Crop: {farmData.crop}</Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col md = {6}>
+                    <Card className = "mb-4">
+                        <Card.Body>
+                            <Card.Title>Satellite Image</Card.Title>
+                            <Card.Img src = {`http://127.0.0.1:8000/${farmData.image_path}`}/>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+            <Row>
+                <Col md = {6}>
+                    <Card className = "mb-4">
+                        <Card.Body>
+                            <Card.Title>NDVI Image</Card.Title>
+                            <Card.Img src = {`http://127.0.0.1:8000/${farmData.ndvi_path}`} />
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col md = {6}>
+                    <Card className = "mb-4">
+                        <Card.Body>
+                            <Card.Title>NDMI Image</Card.Title>
+                            <Card.Img src = {`http://127.0.0.1:8000/${farmData.ndmi_path}`}/>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+
+            <Row>
+                <Col md={6}>
+                    <Card className="mb-4">
+                        <Card.Body>
+                            <Card.Title>NDWI Image</Card.Title>
+                            <img src={`http://127.0.0.1:8000/${farmData.ndwi_path}`} alt="NDWI Image" className="img-fluid" />
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col md={6}>
+                    <Card className="mb-4">
+                        <Card.Body>
+                            <Card.Title>Indices Over Time</Card.Title>
+                            {/* <LineChart data={farmData.indicesOverTime} /> Assume you have this data */}
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+
+            {/* <div>
                 <h2>NDMI Image</h2>
                 <img src = {`http://127.0.0.1:8000/${farmData.ndmi_path}`} alt = "NDMI Image"/>
             </div>
             <div>
                 <h2>NDWI Image</h2>
                 <img src = {`http://127.0.0.1:8000/${farmData.ndwi_path}`} alt = "NDWI Image"/>
-            </div>
-        </div>
+            </div> */}
+        </Container>
     )
 
 }
