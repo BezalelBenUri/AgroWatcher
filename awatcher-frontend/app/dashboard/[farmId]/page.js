@@ -9,13 +9,19 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-// import LineChart from './LineChart';
 import Spinner from 'react-bootstrap/Spinner';
+
+import {Line} from 'react-chartjs-2'
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const Dashboard = () => {
     const {farmId} = useParams();
     const [farmData, setFarmData] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const [timeSeriesData, setTimeSeriesData] = useState({dates: [], ndvi: [], ndmi: [], ndwi: [] });
 
     useEffect(() => {
         if (farmId) {
@@ -27,6 +33,23 @@ const Dashboard = () => {
             })
             .catch(error => {
                 console.error("Error fetching farm data:", error);
+            })
+
+            //Fetch time series data
+        axios.get(`http://127.0.0.1:8000/api/v1/farms/${farmId}/time_series/`)
+            .then(response => {
+                const timeSeries = response.data.time_series;
+
+                // Extracting the time series data
+                const dates = timeSeries.map(entry => new Date(entry.date).toLocaleDateString());
+                const ndvi = timeSeries.map(entry => entry.NDVI);
+                const ndmi = timeSeries.map(entry => entry.NDMI);
+                const ndwi = timeSeries.map(entry => entry.NDWI);
+
+                setTimeSeriesData({dates, ndvi, ndmi, ndwi});
+            })
+            .catch(error => {
+                console.error("error fetching indices data:", error);
             })
             .finally(() => {
                 setLoading(false);
@@ -42,6 +65,31 @@ const Dashboard = () => {
 
     if (!farmData) {
         return <div> Error Loading farm data</div>
+    }
+
+    // Setup data for the chart
+    const chartData = {
+        labels: timeSeriesData.dates, // Dates from the time series data
+        datasets: [
+            {
+                label: "NDVI",
+                data: timeSeriesData.ndvi,
+                borderColor: "green",
+                fill: false,
+            },
+            {
+                label: "NDMI",
+                data: timeSeriesData.ndmi,
+                borderColor: "blue",
+                fill: false,
+            },
+            {
+                label: "NDWI",
+                data: timeSeriesData.ndwi,
+                borderColor: "cyan",
+                fill: false,
+            },
+        ]
     }
 
     return (
@@ -86,32 +134,24 @@ const Dashboard = () => {
             </Row>
 
             <Row>
-                <Col md={6}>
-                    <Card className="mb-4">
+                <Col md = {6}>
+                    <Card className = "mb-4">
                         <Card.Body>
                             <Card.Title>NDWI Image</Card.Title>
-                            <img src={`http://127.0.0.1:8000/${farmData.ndwi_path}`} alt="NDWI Image" className="img-fluid" />
+                            <img src = {`http://127.0.0.1:8000/${farmData.ndwi_path}`} alt="NDWI Image" className = "img-fluid" />
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col md={6}>
-                    <Card className="mb-4">
+                <Col md = {6}>
+                    <Card className = "mb-4">
                         <Card.Body>
                             <Card.Title>Indices Over Time</Card.Title>
-                            {/* <LineChart data={farmData.indicesOverTime} /> Assume you have this data */}
+                            <Line data = {chartData} />
                         </Card.Body>
                     </Card>
                 </Col>
             </Row>
 
-            {/* <div>
-                <h2>NDMI Image</h2>
-                <img src = {`http://127.0.0.1:8000/${farmData.ndmi_path}`} alt = "NDMI Image"/>
-            </div>
-            <div>
-                <h2>NDWI Image</h2>
-                <img src = {`http://127.0.0.1:8000/${farmData.ndwi_path}`} alt = "NDWI Image"/>
-            </div> */}
         </Container>
     )
 
