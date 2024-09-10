@@ -93,60 +93,85 @@ const Dashboard = () => {
     }
 
     return (
-        <Container>
-            <h1 className = "my-4">{farmData.name}</h1>
-            <Row>
+        <Container className = "my-8">
+            <h1 className = "text-3xl font-bold text-center mb-8">{farmData.name}</h1>
+
+            {/* Farm details and satellite images */}
+            <Row className = "mb-8">
                 <Col md = {6}>
-                    <Card className = "mb-6">
-                        <Card.Body>
-                            <Card.Title>Farm Details</Card.Title>
-                            <Card.Text>Size: {farmData.size}</Card.Text>
-                            <Card.Text>Crop: {farmData.crop}</Card.Text>
+                    <Card className = "shadow-lg">
+                        <Card.Body className = "p-6">
+                            <Card.Title className = "text-xl font-semibold text-gray-700">Farm Details</Card.Title>
+                            <Card.Text className = "mt-4 text-gray-600">
+                                <span className = "font-bold">Size:</span> {farmData.size} Hectares</Card.Text>
+                            <Card.Text className = "text-gray-600">
+                                <span className = "font-bold">Crop:</span> {farmData.crop}
+                            </Card.Text>
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col md = {6}>
-                    <Card className = "mb-4">
-                        <Card.Body>
-                            <Card.Title>Satellite Image</Card.Title>
-                            <Card.Img src = {`http://127.0.0.1:8000/${farmData.image_path}`}/>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-            <Row>
-                <Col md = {6}>
-                    <Card className = "mb-4">
-                        <Card.Body>
-                            <Card.Title>NDVI Image</Card.Title>
-                            <Card.Img src = {`http://127.0.0.1:8000/${farmData.ndvi_path}`} />
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col md = {6}>
-                    <Card className = "mb-4">
-                        <Card.Body>
-                            <Card.Title>NDMI Image</Card.Title>
-                            <Card.Img src = {`http://127.0.0.1:8000/${farmData.ndmi_path}`}/>
+                    <Card className = "shadow-lg">
+                        <Card.Body className = "p-6">
+                            <Card.Title className = "text-xl font-semibold text-gray-700">Satellite Image</Card.Title>
+                            <Card.Img 
+                                src = {`http://127.0.0.1:8000/${farmData.image_path}`}
+                                alt = "satellite Image"
+                                className = "rounded-lg mt-4"/>
                         </Card.Body>
                     </Card>
                 </Col>
             </Row>
 
-            <Row>
-                <Col md = {6}>
-                    <Card className = "mb-4">
-                        <Card.Body>
-                            <Card.Title>NDWI Image</Card.Title>
-                            <img src = {`http://127.0.0.1:8000/${farmData.ndwi_path}`} alt="NDWI Image" className = "img-fluid" />
+            {/* Index Images */}
+            <Row className = "mb-8">
+                <Col md = {4}>
+                    <Card className = "shadow-lg">
+                        <Card.Body className = "p-6">
+                            <Card.Title className="text-x1 font-semibold text-gray-700">NDVI Image</Card.Title>
+                            <Card.Img
+                                src = {`http://127.0.0.1:8000/${farmData.ndvi_path}`}
+                                alt = "NDVI Image"
+                                className = "rounded-lg mt-4"/>
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col md = {6}>
+                <Col md = {4}>
+                    <Card className = "shadow-lg">
+                        <Card.Body className = "p-6">
+                            <Card.Title className = "text-xl font-semibold text-gray-700">NDMI Image</Card.Title>
+                            <Card.Img
+                                src = {`http://127.0.0.1:8000/${farmData.ndmi_path}`}
+                                alt = "NDMI Image"
+                                className = "rounded-lg mt-4"/>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col md = {4}>
                     <Card className = "mb-4">
                         <Card.Body>
-                            <Card.Title>Indices Over Time</Card.Title>
+                            <Card.Title className = "text-xl font-semibold text-gray-700">NDWI Image</Card.Title>
+                            <Card.Img
+                                src = {`http://127.0.0.1:8000/${farmData.ndwi_path}`}
+                                alt = "NDWI Image"
+                                className = "rounded-lg mt-4"/>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+
+            {/* Indices Time Series */}
+            <Row className = "mb-8">
+                <Col md = {12}>
+                    <Card className = "shadow-lg">
+                        <Card.Body className = "p-6">
+                            <Card.Title className = "text-xl font-semibold text-gray-700">Indices Over Time</Card.Title>
                             <Line data = {chartData} />
+                            <div className = "mt-4">
+                                <p className = "text-gray-600">
+                                Time series chart for NDVI, NDMI, NDWI indices.
+                                </p>
+                            </div>
                         </Card.Body>
                     </Card>
                 </Col>

@@ -109,7 +109,7 @@ def download_satellite_image(farm):
         # Define visualization parameters for indices
         ndvi_vis_params = {"min": -1, "max": 1, "palette": ["blue", "white", "green"]}
         ndmi_vis_params = {"min": -1, "max": 1, "palette": ["white", "blue"]}
-        ndwi_vis_params = {"min": -1, "max": 1, "palette": ["white", "green"]}
+        ndwi_vis_params = {"min": -1, "max": 1, "palette": ["white", "cyan"]}
 
 
         # Get URLS for indices
@@ -131,7 +131,7 @@ def download_satellite_image(farm):
         farm.image_path = os.path.join('generated/satellite_images', f'{farm.id}_satellite.png')
         farm.ndvi_path = os.path.join('generated/ndvi_images', f'{farm.id}_ndvi.png')
         farm.ndmi_path = os.path.join('generated/ndmi_images', f'{farm.id}_ndmi.png')
-        farm.ndwi_path = os.path.join('generated/ndmi_images', f'{farm.id}_ndmi.png')
+        farm.ndwi_path = os.path.join('generated/ndwi_images', f'{farm.id}_ndwi.png')
         farm.save()
     except Exception as e:
         print(f"Error downloading satellite image: {e}")
