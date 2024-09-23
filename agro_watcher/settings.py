@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
+env = environ.Env(DEBUG=(bool, True))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,13 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-k7a1%tgi71t!$0%&b=)gc=(f6_(fu$6!ges$%u=k_!9xbz1^d_"
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+
+
+# # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = "django-insecure-k7a1%tgi71t!$0%&b=)gc=(f6_(fu$6!ges$%u=k_!9xbz1^d"
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -87,11 +93,11 @@ WSGI_APPLICATION = "agro_watcher.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": "awatcher_db",
-        "USER": "awatch",
-        "PASSWORD": "@1234",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
     }
 }
 

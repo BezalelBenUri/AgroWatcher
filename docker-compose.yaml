@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  postgis:
+    image: geonode/postgis:15.3
+    container_name: postgis4agro_watcher
+    volumes:
+      - ./init-db:/docker-entrypoint-initdb.d/
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - agrowatcher-api
+  
+
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django4agro_watcher
+    env_file:
+      - .env
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./:/home/geouser/agrowatcher
+    ports:
+      - "8000:8000"
+    restart: always
+    depends_on:
+      - postgis
+    networks:
+      - agrowatcher-api
+
+  awatcher-frontend:
+    build:
+      context: ./awatcher-frontend
+      dockerfile: Dockerfile
+    container_name: awatcherfrontend4agro_watcher
+    volumes:
+      - ./awatcher-frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    # stdin_open: true
+    # tty: true
+    depends_on:
+      - django
+    networks:
+      - agrowatcher-api
+
+networks:
+  agrowatcher-api:
+    driver: bridge
+
+
+volumes:
+  postgres_data:

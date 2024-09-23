@@ -6,8 +6,12 @@ from django.conf import settings
 from .models import farm
 
 # Authenticate and initialize the Earth Engine API
-ee.Authenticate()
-ee.Initialize(project="ee-bezalelbenuri")
+# ee.Authenticate()
+# ee.Initialize(project="ee-bezalelbenuri")
+
+service_account = 'agro-watcher@ee-bezalelbenuri.iam.gserviceaccount.com'
+credentials = ee.ServiceAccountCredentials(service_account, 'ee-bezalelbenuri-b751759fc97e.json')
+ee.Initialize(credentials)
 
 
 def calculate_indices(image, geometry):
