@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "ee-bezalelbenuri",
+  "private_key_id": "b751759fc97e85a0424f66997012eafb527af5bf",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDV59L+Yi2etFg3\nhMf5QAVj0iyybCo8Qz6VkuEUeg9E1jjEMUdvaOrCUib6Qi/u6+StrF5klDW8oepa\nkOM1XAYXnB15XCBgI9+uTtEqORX4Qao9/6z9oL50fo7IhZW7/95LsxmT3+CoNqy2\nvN/l8G6zlgsVDJKwgcXYgpJPfmLEWtDlWHw+TkvB9MiqxaHGTmoPgvFrtVpsbnuq\nyoLHjkGxNVEksjDp7JQgCoabsNIA8//82QeOW91quqeWB4HAevdFIEd1OeqqYVQ0\n7UYRy9SL+tIkoRiJlm5HalCtuqcoFIq3hnYNVyl2beeNBSw5ZUQSX6Pje5eTEsON\nCEzXtulpAgMBAAECggEAAIzlRnWI9cOzxufK7m2fXe2CYy6jUK6hHHgpZ1i1jZkq\nAfo4+3THBts4gbQWJLybZOWAxCw786lsfZFqHj7nfpvOmRt3M1wgRRXrlJrbPz1n\nA1wTLT9iwhC5zBMI6rgKscHrFs3wiWpDmUBE6LXsyP5BtssGnRjmYgta9kSmWyg5\n9EuxostT3yTC5pzI9aTFXhTflgLTHTC4VE90k5LE3wDrLDAyCGoXycD9lKl2NLBU\ni1aleVE2rhTp5Jz52PazA/dvq4BvvGEHxcrEZJiYzNeNd8666d/hYKZeOclL7hTl\neoO9utZPlbXA4TwMiMYhFw5VZgJru6h/0V/53OjkwQKBgQD+HFcztasd8zab1JE1\nDmT1/ZI4d5fc8Q5Q/uW4XKX/+xZnr4yZ1Nd2LYdZN9Yn9wZH9eyjXkxGFNmK75RF\naKRE5dbKhXj+yPap2f5e3i4et99KMmlh3uL/gqXT9x4Ff/Rm3NARwoe0NIiTOsL+\njj8i1Yb+MzH9wS9GbkTxgVqWwQKBgQDXfvWfFkLnQbtC2hj9DVaN6bkOJWa9ypJt\nC3w1mB4LyEdBWULbzVkgdQfjVoF7sjMzT7IJiGYha173y0ZR4PiygAA4JOrhJ2rQ\nlC70UElriAsepXB/qhCbUZVsWTYEVRR5AalOWYz3mQ5fiTXQkgpwqPEBxpM+OwxT\nXzfk54ZkqQKBgGetQnrrjTR8DfTIZrJh/BlNawI08TYI+BFd3nY4/tWRKVQGkPQW\nng4uh0GEgZDuvZZQpUsGZ1JUoWmJVFJ5XkRqDhe1G2fAsLseISWtut13odfQ96Qh\n3zXmpSf1dD9ENIBfaVlFqD6DDJIdcH+Ro/rfaeN/Gc9xqYsv5FswrrhBAoGBALcc\nYonz2JW4/O4pdOJR2yJrX5vtnAfZgeK2x6yivaU1YZbdyjoLm5hA2ZsLfqslGOyY\n46fGB0KOgfv89pvMlobWzVjnxc3cOJ9TyzI+pqSAzTIVUiqoz8Oq51VR2NyFjwfj\nqYGyBl6958C2TswTzFs+ssvXeHaAplCRsGUJduFBAoGBALH/decLurreohBvICmH\nSiBjqgUCx+cGEfR+p/izC6zdjrI7vpvorAs+htJ5/eWkxC2sSmnbPh+4xgBVVBrh\nDE6R+7zD2r9A1QOt0eJGFhZKoh99ZcOh/3nMFN6K2KKs5KDhHcF0JYXoGFqyt35q\nM+Ew5XRgl7JyM0mV2Bo+mWt6\n-----END PRIVATE KEY-----\n",
+  "client_email": "agro-watcher@ee-bezalelbenuri.iam.gserviceaccount.com",
+  "client_id": "100817384299008598520",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/agro-watcher%40ee-bezalelbenuri.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
