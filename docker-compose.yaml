@@ -17,6 +17,19 @@ services:
     restart: always
     networks:
       - agrowatcher-api
+
+  nginx:
+    build:
+         context: ./nginx
+         dockerfile: Dockerfile
+    container_name: nginx4agro_watcher
+    restart: always
+    depends_on:
+        - awatcher-frontend
+    ports:
+        - 8080:8080
+    networks:
+        - agrowatcher-api
   
 
   django:
